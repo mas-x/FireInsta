@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">FireInsta</string>
+    <string name="continue_with_email">Continue with Email</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email_address">Email Address</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="text_success">Success</string>
+    <string name="text_error">Error</string>
+    <string name="text_ok">Okay</string>
+    <string name="message">Message</string>
+    <string name="display_name">Display Name</string>
+    <string name="following">following</string>
+    <string name="followers">followers</string>
+    <string name="posts">posts</string>
+    <string name="upload">Upload</string>
+    <string name="what_do_you_think_of_this_picture">What do you think of this picture?</string>
+</resources>

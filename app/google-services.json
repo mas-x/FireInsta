@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "822250915011",
+    "firebase_url": "https://fireinsta-f8a9a.firebaseio.com",
+    "project_id": "fireinsta-f8a9a",
+    "storage_bucket": "fireinsta-f8a9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822250915011:android:27c5c1214f3f100a5cce76",
+        "android_client_info": {
+          "package_name": "com.masrooraijaz.fireinsta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "822250915011-ut5mj06foj0p55irevsa5m78vi5tlogh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.masrooraijaz.fireinsta",
+            "certificate_hash": "c631b8a320e22db8bc27fa39098e54f95b0b7e78"
+          }
+        },
+        {
+          "client_id": "822250915011-r5qv15j9opn2gv32hfsdc2lojf21kmq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDnLV9TGPWw7I81hS9dXiv5ZtVDHe6HJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822250915011-r5qv15j9opn2gv32hfsdc2lojf21kmq9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
