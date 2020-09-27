@@ -4,7 +4,7 @@ FireInsta is a photo sharing app (similar to Instagram) made with Firebase.
 
 Features
 ---------------
-- Add new photos
+- Upload your photos and share with other users.
 - Like & comment on photos
 - Search and follow other users
 - Explore popular photos
