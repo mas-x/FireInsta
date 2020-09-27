@@ -1,5 +1,5 @@
 # FireInsta
-Photo Gallery app made with Firebase.
+A photo gallery app made with Firebase Firestore
 
 
 Features
