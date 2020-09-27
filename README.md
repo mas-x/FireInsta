@@ -1,5 +1,5 @@
-# FireInsta
-A photo gallery app made with Firebase.
+# About FireInsta
+FireInsta is a photo sharing app (similar to Instagram) made with Firebase.
 
 
 Features
