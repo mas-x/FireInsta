@@ -1,5 +1,5 @@
 # FireInsta
-Photo Gallery app. Share your pictures with your loved ones.
+Photo Gallery app made with Firebase.
 
 
 Features
