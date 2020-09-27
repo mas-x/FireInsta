@@ -1,21 +1,13 @@
 package com.masrooraijaz.fireinsta.ui.main.home
 
 import android.content.Context
-import android.os.Bundle
 import android.util.Log
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.RequestManager
-import com.masrooraijaz.fireinsta.R
 import com.masrooraijaz.fireinsta.ui.DataListener
 import com.masrooraijaz.fireinsta.ui.main.StatesListener
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val TAG = "BaseHomeFragment"
 

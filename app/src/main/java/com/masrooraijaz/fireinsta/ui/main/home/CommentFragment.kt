@@ -1,31 +1,30 @@
 package com.masrooraijaz.fireinsta.ui.main.home
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.firestore.paging.FirestorePagingOptions
 import com.masrooraijaz.fireinsta.R
 import com.masrooraijaz.fireinsta.models.Comment
-import com.masrooraijaz.fireinsta.models.Post
 import com.masrooraijaz.fireinsta.ui.InteractionListener
-import com.masrooraijaz.fireinsta.ui.main.MainActivity
 import com.masrooraijaz.fireinsta.util.FireStoreUtil
 import com.masrooraijaz.fireinsta.util.PAGE_SIZE
 import com.masrooraijaz.fireinsta.util.PREFETCH_DISTANCE
 import kotlinx.android.synthetic.main.fragment_comment.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class CommentFragment : BaseHomeFragment(), InteractionListener<Comment> {
 
 
     lateinit var commentsAdapter: CommentsFirestorePagingAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,9 +37,27 @@ class CommentFragment : BaseHomeFragment(), InteractionListener<Comment> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribeObservers()
+
+        btn_post_comment.setOnClickListener {
+            postComment()
+        }
+
+        edit_text_comment.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(editable: Editable?) {
+                btn_post_comment.isEnabled = editable?.isNotEmpty() ?: false
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
+            }
+
+        })
     }
 
-    fun subscribeObservers() {
+    private fun subscribeObservers() {
 
         homeViewModel.selectedPost.observe(viewLifecycleOwner, Observer { post ->
             post?.postId?.let {
@@ -66,11 +83,32 @@ class CommentFragment : BaseHomeFragment(), InteractionListener<Comment> {
         commentsAdapter = CommentsFirestorePagingAdapter(
             options,
             statesListener,
-            this
+            this,
+            homeViewModel.getStorageReference(),
+            requestManager
         )
 
 
         initRecyclerView()
+    }
+
+
+    private fun postComment() {
+        homeViewModel.postComment(
+            edit_text_comment.text.toString().trim()
+        ).observe(viewLifecycleOwner, Observer { dataOrException ->
+
+            dataListener.handleDataChange(dataOrException)
+
+            dataOrException.data?.let { message ->
+                Toast.makeText(requireContext(), message.msg, Toast.LENGTH_SHORT).show()
+                commentsAdapter.refresh()
+            }
+
+            edit_text_comment.setText("")
+
+
+        })
     }
 
     private fun initRecyclerView() {
@@ -82,8 +120,8 @@ class CommentFragment : BaseHomeFragment(), InteractionListener<Comment> {
     }
 
     override fun onClick(item: Comment) {
-    }
 
+    }
 
 
 }

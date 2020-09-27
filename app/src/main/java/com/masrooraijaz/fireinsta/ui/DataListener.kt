@@ -4,4 +4,7 @@ import com.masrooraijaz.fireinsta.util.DataOrException
 
 interface DataListener {
     fun handleDataChange(dataOrException: DataOrException<*, *>)
+
+    fun isStoragePermissionGranted(): Boolean
+
 }

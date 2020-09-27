@@ -5,6 +5,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.home.HomeFragment">
 
+
+    <TextView
+        android:id="@+id/text_no_items"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="30dp"
+        android:text="@string/no_posts_to_show"
+        android:textAlignment="center"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_home"
         android:layout_width="match_parent"

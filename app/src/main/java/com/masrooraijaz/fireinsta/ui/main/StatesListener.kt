@@ -1,14 +1,15 @@
 package com.masrooraijaz.fireinsta.ui.main
 
-interface StatesListener {
+ interface StatesListener {
 
-    fun onLoad()
+     fun onLoad()
 
-    fun onLoadingMore()
+     fun onLoadingMore()
 
-    fun onLoaded()
+     fun onLoaded()
 
-    fun onFinished()
+     fun onFinished()
 
-    fun onError()
-}
+     fun onError()
+
+ }

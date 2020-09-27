@@ -1,13 +1,16 @@
 package com.masrooraijaz.fireinsta.ui.main
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.navigation.*
-import androidx.navigation.fragment.findNavController
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -15,8 +18,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.masrooraijaz.fireinsta.BaseActivity
 import com.masrooraijaz.fireinsta.R
 import com.masrooraijaz.fireinsta.ui.DataListener
-import com.masrooraijaz.fireinsta.ui.main.home.ViewPostFragment
 import com.masrooraijaz.fireinsta.util.DataOrException
+import com.masrooraijaz.fireinsta.util.PERMISSIONS_REQUEST_READ_STORAGE
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val TAG = "MainActivity"
@@ -49,7 +52,14 @@ class MainActivity : BaseActivity(), DataListener, StatesListener,
         )
 
         appBarConfiguration =
-            AppBarConfiguration(setOf(R.id.homeFragment, R.id.uploadFragment, R.id.profileFragment))
+            AppBarConfiguration(
+                setOf(
+                    R.id.homeFragment,
+                    R.id.profileFragment,
+                    R.id.exploreFragment,
+                    R.id.searchFragment
+                )
+            )
 
         setupActionBarWithNavController(
             findNavController(R.id.main_nav_host_fragment),
@@ -66,6 +76,26 @@ class MainActivity : BaseActivity(), DataListener, StatesListener,
         }
     }
 
+    override fun isStoragePermissionGranted(): Boolean {
+        if ((ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED)
+        ) {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ), PERMISSIONS_REQUEST_READ_STORAGE
+            )
+            return false
+        } else
+            return true
+    }
+
 
     override fun onLoad() {
         showProgressbar(true)
@@ -80,7 +110,7 @@ class MainActivity : BaseActivity(), DataListener, StatesListener,
     }
 
     override fun onFinished() {
-        //Dont know yet
+        showProgressbar(false)
     }
 
     override fun onError() {
@@ -131,7 +161,6 @@ class MainActivity : BaseActivity(), DataListener, StatesListener,
                 showToolbar(true)
             }
         }
-
     }
 
 

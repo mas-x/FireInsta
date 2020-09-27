@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     tools:context=".ui.main.account.ProfileFragment">
 
@@ -16,13 +16,13 @@
 
 
         <androidx.cardview.widget.CardView
-            app:cardElevation="5dp"
-            app:cardCornerRadius="20dp"
-            android:layout_marginHorizontal="5dp"
-            android:layout_marginVertical="20dp"
             android:id="@+id/profile_card_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="20dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="5dp">
 
 
             <LinearLayout
@@ -39,8 +39,11 @@
                     android:orientation="vertical">
 
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/image_profile_picture"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:src="@drawable/ic_baseline_account_circle_24" />
 
                     <TextView
@@ -149,18 +152,44 @@
                         android:background="@drawable/btn_style_simple"
                         android:backgroundTint="@color/colorPrimary"
                         android:paddingHorizontal="30dp"
-                        android:text="Follow"
+                        android:text="@string/follow"
                         android:textColor="@android:color/white" />
+
+                    <Button
+                        android:id="@+id/btn_unfollow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_style_simple"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:paddingHorizontal="30dp"
+                        android:text="@string/unfollow"
+                        android:textColor="@android:color/white"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+
+        <TextView
+            android:id="@+id/text_no_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_card_view"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:padding="30dp"
+            android:text="@string/user_has_no_posts"
+            android:textAlignment="center"
+            android:visibility="gone" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_profile_pics"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/profile_card_view" />
+
+
     </RelativeLayout>
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

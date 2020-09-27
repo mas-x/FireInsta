@@ -19,4 +19,18 @@
     <string name="posts">posts</string>
     <string name="upload">Upload</string>
     <string name="what_do_you_think_of_this_picture">What do you think of this picture?</string>
+    <string name="post">Post</string>
+    <string name="add_your_comment">Add your comment</string>
+    <string name="search">Search</string>
+    <string name="photos">photos</string>
+    <string name="people">People</string>
+    <string name="photos_sentence_case">Photos</string>
+    <string name="follow">Follow</string>
+    <string name="unfollow">Unfollow</string>
+    <string name="caption">Caption</string>
+    <string name="no_posts_to_show">No posts to show!</string>
+    <string name="nothing_to_show">Nothing to show!</string>
+    <string name="user_has_no_posts">User has no posts</string>
+    <string name="sign_out">Sign Out</string>
+
 </resources>

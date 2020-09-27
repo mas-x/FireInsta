@@ -13,29 +13,65 @@
         <action
             android:id="@+id/action_homeFragment_to_viewImageFragment"
             app:destination="@id/viewImageFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_commentFragment"
+            app:destination="@id/commentFragment" />
     </fragment>
     <fragment
         android:id="@+id/viewImageFragment"
         android:name="com.masrooraijaz.fireinsta.ui.main.home.ViewPostFragment"
-        android:label="fragment_view_image"
-        tools:layout="@layout/fragment_view_image" >
+        android:label="Post"
+        tools:layout="@layout/fragment_view_image">
         <action
             android:id="@+id/action_viewImageFragment_to_commentFragment"
             app:destination="@id/commentFragment" />
+        <argument
+            android:name="post"
+            app:argType="com.masrooraijaz.fireinsta.models.Post"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.masrooraijaz.fireinsta.ui.main.account.ProfileFragment"
         android:label="My Profile"
-        tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/uploadFragment"
-        android:name="com.masrooraijaz.fireinsta.ui.main.upload.UploadFragment"
-        android:label="fragment_upload_picture"
-        tools:layout="@layout/fragment_upload_picture" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_viewImageFragment"
+            app:destination="@id/viewImageFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.masrooraijaz.fireinsta.models.User"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/commentFragment"
         android:name="com.masrooraijaz.fireinsta.ui.main.home.CommentFragment"
-        android:label="fragment_comment"
+        android:label="Comments"
         tools:layout="@layout/fragment_comment" />
+    <fragment
+        android:id="@+id/exploreFragment"
+        android:name="com.masrooraijaz.fireinsta.ui.main.home.search.ExploreFragment"
+        android:label="Explore"
+        tools:layout="@layout/fragment_explore">
+        <action
+            android:id="@+id/action_searchFragment_to_viewImageFragment"
+            app:destination="@id/viewImageFragment" />
+        <action
+            android:id="@+id/action_exploreFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.masrooraijaz.fireinsta.ui.main.home.search.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_viewImageFragment2"
+            app:destination="@id/viewImageFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

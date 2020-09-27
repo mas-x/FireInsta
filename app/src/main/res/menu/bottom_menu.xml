@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/homeFragment"
-        android:title="Home"
-        android:icon="@drawable/ic_baseline_home_24"/>
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
 
-  <!--  <item android:id="@+id/nav_search"
-        android:title="Search"
+    <item
+        android:id="@+id/exploreFragment"
         android:icon="@drawable/ic_baseline_search_24"
-        />-->
+        android:title="Search" />
 
-    <item android:id="@+id/uploadFragment"
-        android:title="Upload"
-        android:icon="@drawable/ic_baseline_arrow_upward_24"/>
-
-    <item android:id="@+id/profileFragment"
-        android:title="Account"
-        android:icon="@drawable/ic_baseline_account_circle_24"/>
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="Account" />
 
 </menu>

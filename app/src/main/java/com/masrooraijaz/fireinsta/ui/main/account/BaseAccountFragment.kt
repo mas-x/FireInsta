@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.RequestManager
 import com.masrooraijaz.fireinsta.ui.DataListener
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.ClassCastException
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 private const val TAG = "BaseAccountFragment"
 
 abstract class BaseAccountFragment : Fragment() {
     protected lateinit var dataListener: DataListener
-    protected val accountViewModel by viewModel<AccountViewModel>()
+    protected val accountViewModel by sharedViewModel<AccountViewModel>()
     protected val requestManager by inject<RequestManager>()
 
     override fun onAttach(context: Context) {

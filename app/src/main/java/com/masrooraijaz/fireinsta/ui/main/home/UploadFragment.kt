@@ -1,37 +1,36 @@
-package com.masrooraijaz.fireinsta.ui.main.upload
+package com.masrooraijaz.fireinsta.ui.main.home
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.view.*
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.bumptech.glide.RequestManager
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.masrooraijaz.fireinsta.R
 import com.masrooraijaz.fireinsta.ui.DataListener
 import com.masrooraijaz.fireinsta.util.SuccessHandling
 import kotlinx.android.synthetic.main.fragment_upload_picture.*
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.ClassCastException
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 private const val TAG = "UploadFragment"
+const val UPLOAD_FRAGMENT_IMAGE_KEY = "ImageUri"
 
-class UploadFragment : Fragment() {
+const val UPLOAD_FRAGMENT_TAG = "UploadFragment"
 
 
-    val PICK_PHOTO = 11
+class UploadFragment
+    : BottomSheetDialogFragment() {
+
 
     private val requestManager by inject<RequestManager>()
-
-    private val viewModel by viewModel<UploadViewModel>()
+    private val viewModel by sharedViewModel<HomeViewModel>()
 
     private lateinit var dataListener: DataListener
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +39,37 @@ class UploadFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_upload_picture, container, false)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.upload_menu, menu);
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.nav_post_photo) {
+            uploadFile()
+        }
+        return super.onOptionsItemSelected(item)
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pickImage()
-        btn_upload.setOnClickListener {
-            uploadFile()
+
+
+        text_caption.addTextChangedListener {
+            text_caption.error = null
         }
+
+        arguments?.let {
+            viewModel.selectedImageUri.value = it.getParcelable(UPLOAD_FRAGMENT_IMAGE_KEY)
+        }
+
+        btn_upload.setOnClickListener { uploadFile() }
+
+
+
         subscribeObservers()
     }
 
@@ -59,6 +82,11 @@ class UploadFragment : Fragment() {
     }
 
     private fun uploadFile() {
+
+        if (text_caption.text.isNullOrBlank()) {
+            text_caption.error = "Caption is required"
+            return;
+        }
         viewModel.selectedImageUri.value?.let { uri ->
             viewModel.uploadFile(
                 text_caption.text.toString(), uri
@@ -68,8 +96,10 @@ class UploadFragment : Fragment() {
                 if (it.data?.msg == SuccessHandling.FILE_UPLOAD_SUCCESS) {
                     Log.d(TAG, "uploadFile: File Uploaded Successfully")
                 }
+
             })
         }
+        dismiss()
     }
 
     override fun onAttach(context: Context) {
@@ -85,24 +115,14 @@ class UploadFragment : Fragment() {
         }
     }
 
-
-    fun pickImage() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "image/*"
-        startActivityForResult(intent, PICK_PHOTO)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == PICK_PHOTO && resultCode == Activity.RESULT_OK) {
-
-            data?.let {
-                viewModel.selectedImageUri.value = it.data
-
-            }
-
-
-        } else {
-            Log.d(TAG, "onActivityResult: Did not select any photo...")
+    companion object {
+        fun newInstance(image: Uri): UploadFragment {
+            val args = Bundle()
+            args.putParcelable(UPLOAD_FRAGMENT_IMAGE_KEY, image)
+            val fragment =
+                UploadFragment()
+            fragment.arguments = args
+            return fragment
         }
     }
 
